@@ -1,9 +1,8 @@
 /**
- * PROJECT PHOENIX: TOTAL MASTER LOGIC & ROUTER v2.3
- * Optimized for Google Apps Script v4.26 (ICAL Engine)
+ * PROJECT PHOENIX: MASTER LOGIC v2.4
+ * Fail-Safe Edition: 3s Intel Timeout + Observer Reveal
  */
 
-// CONFIGURATION: Replace with your actual AppScript Web App URL
 const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVadFgts618Tmji9qZaVbf5DQWaKWOMlf9wJXvrLzq6O9cgV0R901bIMjtdYEuikq6/exec';
 
 const T774_ROUTER = {
@@ -25,6 +24,8 @@ window.routeThisPage = function() {
     const fileName = T774_ROUTER[menuId] || T774_ROUTER['HOME'];
     const githubPath = `https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/pages/${fileName}`;
 
+    console.log(`? Phoenix Router: Routing ${menuId || 'DEFAULT'} -> ${fileName}`);
+
     fetch(githubPath)
         .then(response => {
             if (!response.ok) throw new Error('GitHub File Not Found');
@@ -37,8 +38,8 @@ window.routeThisPage = function() {
                 
                 // EXECUTE ELITE FEATURES
                 initInteractivity();
-                fetchLiveEvents(); 
-                initScrollReveal();
+                initScrollReveal(); // Initialize animations immediately
+                fetchLiveEvents();   // Fetch data in the background
                 
                 console.log(`✅ SPA Engine: Rendered ${fileName}`);
             }
@@ -47,57 +48,54 @@ window.routeThisPage = function() {
 };
 
 /**
- * 2. THE LIVE INTEL ENGINE (Mapped to AppScript v4.26)
+ * 2. THE LIVE INTEL ENGINE (With 3s Timeout)
  */
 async function fetchLiveEvents() {
     const badge = document.getElementById('nextMeetingBadge');
     const dateDisplay = document.getElementById('nextMeetingDate');
     if (!badge && !dateDisplay) return;
 
+    // TACTICAL TIMEOUT: Don't let a slow fetch hang the UI
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
     try {
-        const response = await fetch(APPSCRIPT_URL);
+        const response = await fetch(APPSCRIPT_URL, { signal: controller.signal });
+        clearTimeout(timeoutId);
         const data = await response.json();
 
-        // NEW: Specific Error Recognition
-        if (data.error) {
-            console.warn(`⚠️ Intelligence Engine: ${data.error}`);
-            // If we're being rate limited, we immediately trigger the fallback math
+        if (data.error || !Array.isArray(data)) {
+            console.warn("⚠️ Intelligence Engine: Rate Limit or Malformed Data.");
             runThursdayFallback();
-            return; 
-        }
-
-        // Ensure the data is an array before trying to search it
-        if (!Array.isArray(data)) {
-            throw new Error("Invalid Intel Format");
+            return;
         }
 
         const allowedKeywords = ['troop meeting', 'fundraiser'];
         const blockedKeywords = ['plc', 'leader', 'committee', 'staff', 'board', 'scoutmaster'];
 
-        const nextPublicMission = data.find(event => {
+        const match = data.find(event => {
             const title = (event.title || "").toLowerCase();
             const isAllowed = allowedKeywords.some(kw => title.includes(kw));
             const isNotBlocked = !blockedKeywords.some(kw => title.includes(kw));
             return isAllowed && isNotBlocked;
         });
 
-        if (nextPublicMission) {
-            const dateStr = `${nextPublicMission.month} ${nextPublicMission.day}`;
-            if (dateDisplay) dateDisplay.innerText = `${nextPublicMission.title} - ${dateStr}`;
+        if (match) {
+            const dateStr = `${match.month} ${match.day}`;
+            if (dateDisplay) dateDisplay.innerText = `${match.title} - ${dateStr}`;
             if (badge) badge.innerText = `Next Mission: ${dateStr}`;
         } else {
             runThursdayFallback();
         }
 
     } catch (err) {
-        // This is the "Safety Net" catch-all
-        console.error("❌ Intel Link Failure:", err.message);
+        console.warn("❌ Intel Link Timeout/Failure. Triggering Fallback Math.");
         runThursdayFallback();
     }
 }
 
 /**
- * 3. THE THURSDAY FALLBACK (If Sheet is empty or offline)
+ * 3. THE THURSDAY FALLBACK (Calculated)
  */
 function runThursdayFallback() {
     const badge = document.getElementById('nextMeetingBadge');
@@ -105,7 +103,7 @@ function runThursdayFallback() {
     
     const now = new Date();
     const nextThursday = new Date();
-    // Calculate distance to Thursday (4)
+    // Distance to Thursday (4)
     const diff = (4 + 7 - now.getDay()) % 7;
     nextThursday.setDate(now.getDate() + (diff === 0 ? 0 : diff));
     
@@ -117,20 +115,29 @@ function runThursdayFallback() {
 }
 
 /**
- * 4. UI & AUTH HELPERS
+ * 4. UI ANIMATIONS (Intersection Observer)
  */
 function initScrollReveal() {
     const reveals = document.querySelectorAll(".reveal");
     if (reveals.length === 0) return;
-    const revealCallback = () => {
-        reveals.forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
+
+    const observerOptions = { threshold: 0.15 };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target); // Reveal once, then stop watching
+            }
         });
-    };
-    window.addEventListener("scroll", revealCallback);
-    revealCallback();
+    }, observerOptions);
+
+    reveals.forEach(el => observer.observe(el));
 }
 
+/**
+ * 5. TWH INTEGRATION HELPERS
+ */
 function initInteractivity() {
     window.toggleTray = function() {
         const tray = document.getElementById('commandTray');
@@ -153,5 +160,6 @@ function initGlobalNav() {
     }
 }
 
-// Boot the redirect check
+// EXECUTION BOOT
 initGlobalNav();
+window.routeThisPage();
