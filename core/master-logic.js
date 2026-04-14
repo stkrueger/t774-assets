@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Replace with your actual AppScript Web App URL
-const APPSCRIPT_URL = 'YOUR_APPSCRIPT_WEBAPP_URL_HERE';
+const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVadFgts618Tmji9qZaVbf5DQWaKWOMlf9wJXvrLzq6O9cgV0R901bIMjtdYEuikq6/exec';
 
 const T774_ROUTER = {
     '62171': 'prospect.html',
