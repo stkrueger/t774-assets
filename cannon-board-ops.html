@@ -1,0 +1,64 @@
+<style>
+    :root { --navy: #00234B; --gold: #FFCC00; --slate: #f8fafc; }
+    #ops-wrapper { font-family: 'Segoe UI', sans-serif; background: var(--slate); padding: 20px; border-radius: 15px; display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+    
+    /* THE CANNON BOARD (KANBAN) */
+    .kanban-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .column { background: #ebedef; border-radius: 10px; padding: 15px; min-height: 500px; }
+    .column h3 { color: var(--navy); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
+    
+    .mission-card { background: white; border-radius: 8px; padding: 15px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; transition: 0.2s; border-left: 5px solid #ccc; }
+    .mission-card:hover { transform: scale(1.02); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+    .mission-card.high-priority { border-left-color: #ef4444; }
+    .mission-card.scout-active { border-left-color: #3b82f6; }
+
+    /* MISSION INTEL SIDEBAR */
+    .intel-sidebar { background: var(--navy); color: white; border-radius: 10px; padding: 20px; }
+    .stat-box { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+    .stat-val { font-size: 28px; font-weight: 900; color: var(--gold); }
+    .stat-label { font-size: 10px; text-transform: uppercase; opacity: 0.7; }
+</style>
+
+<div id="ops-wrapper">
+    <div class="kanban-grid">
+        <div class="column">
+            <h3>Backlog / Proposed</h3>
+            <div class="mission-card high-priority" onclick="openMission('Philmont 2027')">
+                <strong>Philmont Expedition</strong><br>
+                <small>Status: Logistics Phase</small>
+            </div>
+        </div>
+        <div class="column">
+            <h3>Active Missions</h3>
+            <div class="mission-card scout-active" onclick="openMission('Eagle: Project Alpha')">
+                <strong>Eagle: Project Alpha</strong><br>
+                <small>Assigned: Scout A</small>
+            </div>
+        </div>
+        <div class="column">
+            <h3>Completed</h3>
+            <div class="mission-card" style="border-left-color: #22c55e;">
+                <strong>Summer Camp 2025</strong><br>
+                <small>Archive: #774-09</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="intel-sidebar">
+        <div class="stat-box">
+            <div class="stat-val">12</div>
+            <div class="stat-label">Active Eagle Projects</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-val">142</div>
+            <div class="stat-label">Total Days in Field</div>
+        </div>
+        <button onclick="alert('Launching Mission Report Generator...')" style="width:100%; background:var(--gold); color:var(--navy); border:none; padding:10px; border-radius:5px; font-weight:bold;">GENERATE REPORT</button>
+    </div>
+</div>
+
+<script>
+    function openMission(name) {
+        alert("Tactical Intel for: " + name + "\n\nThis would normally trigger your AppScript modal to pull live data.");
+    }
+</script>
