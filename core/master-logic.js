@@ -1,11 +1,10 @@
 /**
- * PROJECT PHOENIX: MASTER LOGIC & ROUTER
- * This is the ONLY file you need to edit to manage page IDs.
+ * PROJECT PHOENIX: TOTAL MASTER LOGIC & ROUTER
+ * Single Source of Truth for Troop 774 Headless Architecture
  */
 
 // 1. THE GLOBAL ROUTING TABLE
 const T774_ROUTER = {
-    // 'TWH_MENU_ID': 'GITHUB_FILE_NAME'
     '62171': 'prospect.html',
     '62168': 'new-scout.html',
     '62214': 'scout-ops.html',
@@ -16,26 +15,45 @@ const T774_ROUTER = {
 
 // 2. THE INJECTION ENGINE
 window.routeThisPage = function() {
+    // Robust ID Detection (Checks various TWH URL formats)
     const urlParams = new URLSearchParams(window.location.search);
-    const menuId = urlParams.get('Menu_Item_ID');
+    let menuId = urlParams.get('Menu_Item_ID') || 
+                 urlParams.get('menu_item_id') || 
+                 urlParams.get('Custom_Form_ID');
     
-    // Determine which file to fetch
+    // Determine target file (Falls back to home.html if ID is missing)
     const fileName = T774_ROUTER[menuId] || T774_ROUTER['HOME'];
-    const githubPath = `https://raw.githubusercontent.com/stkrueger/t774-assets/main/pages/${fileName}`;
+    
+    // Using jsDelivr for professional-grade file delivery
+    const githubPath = `https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/pages/${fileName}`;
+
+    console.log(`Phoenix Router: Routing ID ${menuId || 'DEFAULT'} to ${fileName}`);
 
     fetch(githubPath)
         .then(response => {
-            if (!response.ok) throw new Error('File not found');
+            if (!response.ok) throw new Error('Network response was not ok');
             return response.text();
         })
         .then(html => {
-            document.getElementById('mission-control-root').innerHTML = html;
-            console.log(`✅ SPA Engine: Loaded ${fileName}`);
-            
-            // Re-trigger any animations or logic needed for the new HTML
-            initInteractivity(); 
+            const root = document.getElementById('mission-control-root');
+            if (root) {
+                root.innerHTML = html;
+                console.log(`✅ SPA Engine: Loaded ${fileName}`);
+                
+                // Re-bind UI listeners for the new HTML
+                initInteractivity();
+                
+                // Fire custom event for any page-specific JS
+                window.dispatchEvent(new Event('spa_page_loaded'));
+            }
         })
-        .catch(err => console.error('❌ Router Error:', err));
+        .catch(err => {
+            console.error('❌ Router Error:', err);
+            const root = document.getElementById('mission-control-root');
+            if (root) {
+                root.innerHTML = '<div style="text-align:center; padding:50px; color:red;">Connection to Mission Control failed. Check GitHub settings.</div>';
+            }
+        });
 };
 
 // 3. ROLE-BASED REDIRECTS (The Ghost Operator)
@@ -43,6 +61,7 @@ function initGlobalNav() {
     let isLoggedIn = false;
     let isLeader = false;
     
+    // Scan for TWH session status
     const navElements = document.querySelectorAll('a, span, div, li'); 
     navElements.forEach(el => {
         const text = el.textContent.trim();
@@ -50,21 +69,36 @@ function initGlobalNav() {
         if (text === 'Maintain' || text === 'Administration') isLeader = true;
     });
 
+    // Execute the Redirect once per session login
     if (isLoggedIn && !sessionStorage.getItem('t774_redirected')) {
         sessionStorage.setItem('t774_redirected', 'true');
-        window.location.href = isLeader 
-            ? `formCustom.aspx?Menu_Item_ID=62215` 
-            : `formCustom.aspx?Menu_Item_ID=62214`;
+        
+        const target = isLeader 
+            ? 'formCustom.aspx?Menu_Item_ID=62215' 
+            : 'formCustom.aspx?Menu_Item_ID=62214';
+            
+        console.log('Project Phoenix: Authenticated. Redirecting to Tactical Ops...');
+        window.location.href = target;
     }
 }
 
-// 4. UI INTERACTIVITY (Tray Toggle, etc.)
+// 4. UI INTERACTIVITY (Tray Toggle)
 function initInteractivity() {
     window.toggleTray = function() {
         const tray = document.getElementById('commandTray');
-        if (tray) tray.classList.toggle('tray-open');
+        if (tray) {
+            tray.classList.toggle('tray-open');
+        } else {
+            console.warn('SPA Engine: Command Tray not found.');
+        }
     };
 }
 
-// Initial Boot
+/**
+ * INITIALIZATION
+ */
+// Run the redirect check immediately
 initGlobalNav();
+
+// Ensure toggleTray and other UI binds are ready
+initInteractivity();
