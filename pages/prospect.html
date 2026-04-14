@@ -28,9 +28,10 @@
         margin: 40px auto !important;
         background: #ffffff !important;
         border-radius: 20px !important;
-        padding: 30px !important;
+        padding: 40px !important;
         border: 1px solid #e2e8f0 !important;
         text-align: left !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
     .fee-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f5f9; }
     .fee-label { font-size: 1.1rem !important; font-weight: 600 !important; color: #64748b !important; }
@@ -38,10 +39,10 @@
 
     .total-row-refined {
         display: flex; justify-content: space-between; align-items: center;
-        padding-top: 25px; margin-top: 10px; border-top: 2px solid #003F87;
+        padding-top: 25px; margin-top: 10px; border-top: 3px solid #003F87;
     }
-    .total-label-refined { font-weight: 900 !important; text-transform: uppercase !important; letter-spacing: 1px !important; font-size: 1rem !important; color: #003F87 !important; }
-    .total-value-refined { font-size: 1.6rem !important; font-weight: 950 !important; color: #003F87 !important; }
+    .total-label-refined { font-weight: 900 !important; text-transform: uppercase !important; letter-spacing: 1px !important; font-size: 1.1rem !important; color: #003F87 !important; }
+    .total-value-refined { font-size: 1.8rem !important; font-weight: 950 !important; color: #003F87 !important; }
 
     /* THE MISSION DOSSIER: Solid Substance */
     .mission-card { 
@@ -102,15 +103,15 @@
     <main class="mission-card">
         <div class="mission-header">
             <h2>Mission Dossier: Recruitment</h2>
-            <div id="nextMeetingBadge" style="display:inline-block; background:#FFCC00; color:#00234B; padding:5px 15px; border-radius:50px; font-weight:900; font-size:0.8rem; margin-top:10px;">MISSION STATUS: ACTIVE</div>
+            <div style="display:inline-block; background:#FFCC00; color:#00234B; padding:5px 15px; border-radius:50px; font-weight:900; font-size:0.8rem; margin-top:10px;">MISSION STATUS: ACTIVE</div>
         </div>
 
         <div class="mission-body">
             <section class="phase-section">
                 <h3>Tactical Recon</h3>
-                <p>Observe the "Scout-Led" mission first-hand. Prospective scouts join the meeting activities immediately, while parents participate in a formal briefing.</p>
+                <p>Observe the "Scout-Led" mission first-hand. Prospective scouts join the meeting activities immediately, while parents participate in a formal briefing with our committee leadership.</p>
                 <div class="intel-grid">
-                    <div class="intel-item"><span class="intel-label">Time Intel</span><span class="intel-value" id="nextMeetingDate">Thursdays @ 7:00 PM</span></div>
+                    <div class="intel-item"><span class="intel-label">Time Intel</span><span class="intel-value">Thursdays @ 7:00 PM</span></div>
                     <div class="intel-item"><span class="intel-label">Location</span><span class="intel-value">JupiterFIRST Hall</span></div>
                     <div class="intel-item"><span class="intel-label">Dress Code</span><span class="intel-value">Casual / Outdoor Gear</span></div>
                 </div>
@@ -118,29 +119,55 @@
 
             <section class="phase-section">
                 <h3>Patrol Integration</h3>
-                <p>Unlike other organizations, Troop 774 operates on the <strong>Patrol Method</strong>. Every scout belongs to a small, autonomous team of 8. They elect their own leaders and plan their own expeditions.</p>
-                <div style="background: #003F87; padding: 50px 40px; border-radius: 30px; border: 4px solid #FFCC00; box-shadow: 0 20px 40px rgba(0,35,75,0.3);">
+                <p>Unlike other organizations, Troop 774 operates on the <strong>Patrol Method</strong>. Every scout belongs to a small, autonomous team of 8. They elect their own leaders and plan their own expeditions, building grit through peer-accountability.</p>
+                <div style="background: #003F87; padding: 50px 40px; border-radius: 30px; border: 4px solid #FFCC00; box-shadow: 0 20px 40px rgba(0,35,75,0.3); margin-top: 40px;">
                     <span style="display: block; font-weight: 950; text-transform: uppercase; letter-spacing: 3px; font-size: 1.4rem; color: #FFCC00; margin-bottom: 20px;">The 774 Philosophy:</span>
                     <span style="display: block; font-size: 2.2rem; color: white; font-weight: 800; line-height: 1.3; font-style: italic;">"Adults provide the safety net.<br>Scouts provide the direction."</span>
                 </div>
             </section>
 
-            <section class="phase-section">
+            <section class="phase-section" style="margin-bottom: 0;">
                 <h3>Mission Logistics</h3>
-                <p>We believe in full transparency. Scouting dues are an investment in gear, insurance, and program quality.</p>
+                <p>We believe in full transparency. Scouting dues are an investment in gear, insurance, and program quality, managed directly by the Troop Committee.</p>
+                
                 <div class="fee-briefing">
-                    <div class="fee-row"><span class="fee-label">Council Program Fee</span><span class="fee-value">$115.00</span></div>
-                    <div class="fee-row"><span class="fee-label">Troop 774 Activity Dues</span><span class="fee-value">$155.00</span></div>
-                    <div class="total-row-refined"><span class="total-label-refined">Total Annual Investment</span><span class="total-value-refined">$270.00</span></div>
+                    <div class="fee-row">
+                        <span class="fee-label">Council Program Fee</span>
+                        <span class="fee-value">$115.00</span>
+                    </div>
+                    
+                    <div class="fee-row">
+                        <span class="fee-label">Troop 774 Activity Dues</span>
+                        <span class="fee-value">$155.00</span>
+                    </div>
+
+                    <div class="total-row-refined">
+                        <span class="total-label-refined">Total Annual Investment</span>
+                        <span class="total-value-refined">$270.00</span>
+                    </div>
+                    
+                    <p style="font-size: 0.9rem !important; margin-top: 25px !important; color: #64748b; line-height: 1.6; text-align: left; font-weight: 600;">
+                        * Rate reflects cash/check payments. Electronic payments (Zelle) may include a nominal processing fee.<br>
+                        * Uniform and Handbook are separate retail purchases (~$125).
+                    </p>
                 </div>
-                <a href="https://my.scouting.org/VES/OnlineReg/1.0.0/?tu=UF-MB-085taa0774" target="_blank" style="display:inline-block; background:#003F87; color:white !important; padding:18px 40px; border-radius:12px; text-decoration:none; font-weight:900; font-size:1.1rem; border: 2px solid #003F87;">Begin Online Application</a>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="https://my.scouting.org/VES/OnlineReg/1.0.0/?tu=UF-MB-085taa0774" target="_blank" 
+                       style="display:inline-block; background:#003F87; color:white !important; padding:22px 50px; border-radius:15px; text-decoration:none; font-weight:900; font-size:1.2rem; border: 3px solid #003F87; box-shadow: 0 15px 30px rgba(0,63,135,0.2);">
+                        Begin Online Application <iconify-icon icon="mdi:open-in-new" style="vertical-align:middle; margin-left:8px;"></iconify-icon>
+                    </a>
+                </div>
             </section>
         </div>
     </main>
 
-    <footer class="journey-footer">
-        <p class="mission-label">Mission Step 01 Complete</p>
-        <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=62218');" class="btn-next-step">Step 2: View The Adventure Guide <iconify-icon icon="mdi:map-marker-distance" style="vertical-align:middle; margin-left:10px; font-size:1.8rem;"></iconify-icon></a>
+    <footer class="journey-footer" style="text-align: center; padding: 100px 20px; background: white; border-top: 1px solid #eee; margin-top: 60px;">
+        <p style="font-weight:950; color:#94a3b8; margin-bottom:30px; letter-spacing:5px; font-size:0.9rem; text-transform:uppercase;">Mission Step 01 Complete</p>
+        <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=62218');" 
+           style="display:inline-block; background:#FFCC00; color:#00234B !important; padding:25px 70px; border-radius:100px; font-weight:950; text-decoration:none; text-transform:uppercase; box-shadow: 0 20px 40px rgba(255, 204, 0, 0.4); font-size:1.4rem; border:4px solid #003F87;">
+            Step 2: View The Adventure Guide <iconify-icon icon="mdi:map-marker-distance" style="vertical-align:middle; margin-left:10px; font-size:1.8rem;"></iconify-icon>
+        </a>
     </footer>
 
     <nav class="tactical-dock">
