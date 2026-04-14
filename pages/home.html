@@ -1,50 +1,33 @@
 <div class="mecca-wrapper">
     <header class="video-hero">
-        <video autoplay muted loop playsinline poster="https://raw.githubusercontent.com/stkrueger/t774-assets/main/hero-poster.jpg">
+        <video autoplay muted loop playsinline>
             <source src="https://raw.githubusercontent.com/stkrueger/t774-assets/main/Boys_Scouts_pioneering_202604122133.mp4" type="video/mp4">
         </video>
-        <div class="hero-content" data-aos="zoom-out">
-            <span class="pathway-label">SCOUTS BSA BOYS • TROOP 774 • JUPITER, FL</span>
+        <div class="hero-content">
+            <span style="display:inline-block; background:#FFCC00; color:#00234B; padding:8px 20px; border-radius:50px; font-weight:900; letter-spacing:2px; margin-bottom:15px; font-size: 0.75rem;">SCOUTS BSA BOYS • TROOP 774 • JUPITER, FL</span>
             <h1>Adventure<br>Starts Here.</h1>
         </div>
     </header>
 
     <div class="container-wide">
-        <div class="instruction-header">
-            <p>Select your path below to access the Command Center</p>
-            <div class="gold-line"></div>
+        <div style="text-align: center; margin: 80px auto 60px auto;">
+            <p style="color: #00234B; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem;">Select your path below to access the Command Center</p>
+            <div style="width: 60px; height: 5px; background: #FFCC00; margin: 15px auto; border-radius: 2px;"></div>
         </div>
 
         <nav class="door-grid">
             <a href="formCustom.aspx?Menu_Item_ID=62171&Stack=0&Custom_Form_ID=8" class="door-tile">
-                <iconify-icon icon="mdi:compass-outline"></iconify-icon>
+                <iconify-icon icon="mdi:compass-outline" style="font-size:45px; color:#003F87;"></iconify-icon>
                 <h3>PROSPECT</h3>
                 <p>"I am interested in joining Troop 774"</p>
             </a>
             </nav>
     </div>
 
-    <section class="stats-bar">
-        <div class="container-wide">
-            <div class="stat-flex">
-                <div><span class="stat-num" id="live-scout-count">--</span><span class="stat-txt">Active Scouts</span></div>
-                <div><span class="stat-num" id="live-eagle-count" style="color:#FFCC00;">87</span><span class="stat-txt">Eagle Scouts</span></div>
-                </div>
-        </div>
-    </section>
-
-    <div id="commandTray">
-        <div class="drag-handle"></div>
-        <h3>Mission Resources</h3>
-        <div class="resource-grid" id="dynamic-tray-links">
-            </div>
-    </div>
+    <nav class="tactical-dock">
+        <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=61935');" class="dock-item"><iconify-icon icon="mdi:home-variant" style="color:#FFCC00; font-size:24px;"></iconify-icon>Home</a>
+        <a href="javascript:LinkTo('FormList.aspx?Menu_Item_ID=45922');" class="dock-item"><iconify-icon icon="mdi:calendar-clock" style="color:#FFCC00; font-size:24px;"></iconify-icon>Ops</a>
+        <a href="javascript:LinkTo('FormDetail.aspx?Menu_Item_ID=45900');" class="dock-item"><iconify-icon icon="mdi:currency-usd-circle" style="color:#FFCC00; font-size:24px;"></iconify-icon>Ledger</a>
+        <a href="javascript:void(0);" class="dock-item" onclick="toggleTray()"><iconify-icon icon="mdi:view-grid-plus" style="color:#FFCC00; font-size:24px;"></iconify-icon>Command</a>
+    </nav>
 </div>
-
-<script>
-    // Initialize Elite Features
-    window.addEventListener('spa_page_loaded', function() {
-        AOS.init({ duration: 800, once: true });
-        updateLiveStats(); // Function to call your AppScript
-    });
-</script>
