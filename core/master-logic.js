@@ -56,14 +56,25 @@ async function fetchLiveEvents() {
 
     try {
         const response = await fetch(APPSCRIPT_URL);
-        const events = await response.json();
-        
-        // ELITE FILTER: Strictly Troop Meetings & Fundraisers
-        // Excludes PLC, Leader meetings, and Staff events
+        const data = await response.json();
+
+        // NEW: Specific Error Recognition
+        if (data.error) {
+            console.warn(`⚠️ Intelligence Engine: ${data.error}`);
+            // If we're being rate limited, we immediately trigger the fallback math
+            runThursdayFallback();
+            return; 
+        }
+
+        // Ensure the data is an array before trying to search it
+        if (!Array.isArray(data)) {
+            throw new Error("Invalid Intel Format");
+        }
+
         const allowedKeywords = ['troop meeting', 'fundraiser'];
         const blockedKeywords = ['plc', 'leader', 'committee', 'staff', 'board', 'scoutmaster'];
 
-        const nextPublicMission = events.find(event => {
+        const nextPublicMission = data.find(event => {
             const title = (event.title || "").toLowerCase();
             const isAllowed = allowedKeywords.some(kw => title.includes(kw));
             const isNotBlocked = !blockedKeywords.some(kw => title.includes(kw));
@@ -71,16 +82,16 @@ async function fetchLiveEvents() {
         });
 
         if (nextPublicMission) {
-            // Using the .month and .day fields from your AppScript
             const dateStr = `${nextPublicMission.month} ${nextPublicMission.day}`;
-            
             if (dateDisplay) dateDisplay.innerText = `${nextPublicMission.title} - ${dateStr}`;
             if (badge) badge.innerText = `Next Mission: ${dateStr}`;
         } else {
             runThursdayFallback();
         }
+
     } catch (err) {
-        console.warn("Intel Link Offline. Using Fallback Math.");
+        // This is the "Safety Net" catch-all
+        console.error("❌ Intel Link Failure:", err.message);
         runThursdayFallback();
     }
 }
