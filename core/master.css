@@ -1,0 +1,23 @@
+/* 1. ARCHITECTURAL RESETS */
+:root { --navy: #00234B; --gold: #FFCC00; --slate: #f3f4f6; --white: #ffffff; }
+.mecca-wrapper { font-family: 'Inter', system-ui, sans-serif; background: var(--slate); padding-bottom: 110px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* 2. THE HAMBURGER KILLER */
+.navbar-toggle, .navbar-toggler, #btnToggleMenu, .navbar-header button { display: none !important; }
+
+/* 3. VIDEO HERO ENGINE */
+.video-hero { position: relative; height: 65vh; width: 100%; overflow: hidden; border-bottom: 8px solid var(--gold); background: var(--navy); }
+.video-hero video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+.hero-content { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; z-index: 5; }
+.hero-content h1 { color: var(--white) !important; font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; text-shadow: 2px 4px 15px rgba(0,0,0,0.8); }
+
+/* 4. TACTICAL DOCK (MOBILE NAV) */
+.tactical-dock { position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 75px !important; background: var(--navy) !important; border-top: 4px solid var(--gold) !important; display: flex !important; justify-content: space-around !important; align-items: center !important; z-index: 999999 !important; }
+.dock-item { color: var(--white) !important; text-decoration: none !important; display: flex !important; flex-direction: column !important; align-items: center !important; font-size: 10px !important; font-weight: 800 !important; text-transform: uppercase !important; }
+
+/* 5. THE COMMAND TRAY */
+#commandTray { position: fixed !important; bottom: -100%; left: 0; width: 100%; background: var(--white) !important; border-radius: 25px 25px 0 0; padding: 20px !important; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 999998 !important; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
+#commandTray.tray-open { bottom: 75px !important; }
+
+@media (min-width: 1025px) { .tactical-dock, #commandTray { display: none !important; } }
