@@ -1,23 +1,175 @@
-/* 1. ARCHITECTURAL RESETS */
-:root { --navy: #00234B; --gold: #FFCC00; --slate: #f3f4f6; --white: #ffffff; }
-.mecca-wrapper { font-family: 'Inter', system-ui, sans-serif; background: var(--slate); padding-bottom: 110px; }
-.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+/* ==========================================================================
+   1. GLOBAL VARIABLES & ARCHITECTURE (THE RIDGEPOINT LOOK)
+   ========================================================================== */
+:root {
+    --navy: #00234B; 
+    --gold: #FFCC00; 
+    --twh-blue: #003F87;
+    --slate: #f3f4f6;
+    --white: #ffffff;
+    --text-main: #1a1a1a;
+    --text-muted: #4b5563;
+}
 
-/* 2. THE HAMBURGER KILLER */
-.navbar-toggle, .navbar-toggler, #btnToggleMenu, .navbar-header button { display: none !important; }
+/* Force Full-Width & Background Consistency */
+html, body {
+    background-color: var(--slate) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    overflow-x: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+}
 
-/* 3. VIDEO HERO ENGINE */
-.video-hero { position: relative; height: 65vh; width: 100%; overflow: hidden; border-bottom: 8px solid var(--gold); background: var(--navy); }
-.video-hero video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
-.hero-content { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; z-index: 5; }
-.hero-content h1 { color: var(--white) !important; font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; text-shadow: 2px 4px 15px rgba(0,0,0,0.8); }
+/* ==========================================================================
+   2. THE HAMBURGER KILLER (TOTAL NAV SUPPRESSION)
+   ========================================================================== */
+.navbar-toggle, .navbar-toggler, #btnToggleMenu, .navbar-header button, 
+.navbar-inverse .navbar-toggle, .mobile-nav-trigger { 
+    display: none !important; 
+}
 
-/* 4. TACTICAL DOCK (MOBILE NAV) */
-.tactical-dock { position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 75px !important; background: var(--navy) !important; border-top: 4px solid var(--gold) !important; display: flex !important; justify-content: space-around !important; align-items: center !important; z-index: 999999 !important; }
-.dock-item { color: var(--white) !important; text-decoration: none !important; display: flex !important; flex-direction: column !important; align-items: center !important; font-size: 10px !important; font-weight: 800 !important; text-transform: uppercase !important; }
+/* Optional: Kills the native TWH header entirely if you are using your own */
+#header-row, .navbar-fixed-top { border-bottom: 5px solid var(--gold) !important; }
 
-/* 5. THE COMMAND TRAY */
-#commandTray { position: fixed !important; bottom: -100%; left: 0; width: 100%; background: var(--white) !important; border-radius: 25px 25px 0 0; padding: 20px !important; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 999998 !important; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
-#commandTray.tray-open { bottom: 75px !important; }
+/* ==========================================================================
+   3. THE "CARDIFY" SYSTEM (FIXING NATIVE TWH TABLES)
+   ========================================================================== */
+.TableContainer, .WidgetContainer, .GridView, .DataWindow, .MainContainer {
+    background: var(--white) !important;
+    border-radius: 15px !important;
+    border: 1px solid #e5e7eb !important;
+    border-top: 6px solid var(--twh-blue) !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important;
+    padding: 25px !important;
+    margin-bottom: 30px !important;
+}
 
-@media (min-width: 1025px) { .tactical-dock, #commandTray { display: none !important; } }
+/* Header styling for TWH tables */
+.GridView th, .DataWindow th {
+    background: #f9fafb !important;
+    color: var(--twh-blue) !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    padding: 15px !important;
+    border-bottom: 2px solid var(--gold) !important;
+}
+
+/* ==========================================================================
+   4. TACTICAL BUTTONS & INPUTS
+   ========================================================================== */
+input[type="submit"], .btn-primary, .btn-action {
+    background: var(--twh-blue) !important;
+    color: var(--gold) !important;
+    border: 2px solid var(--gold) !important;
+    border-radius: 50px !important;
+    padding: 12px 30px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+input[type="submit"]:hover, .btn-primary:hover {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   5. VIDEO HERO ENGINE (FOR CUSTOM PAGES)
+   ========================================================================== */
+.video-hero { 
+    position: relative; 
+    height: 70vh; 
+    width: 100%; 
+    overflow: hidden; 
+    border-bottom: 10px solid var(--gold); 
+    background: var(--navy); 
+}
+
+.video-hero video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    filter: brightness(0.5); 
+}
+
+.hero-content { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center; 
+    width: 90%; 
+    z-index: 10; 
+}
+
+.hero-content h1 { 
+    color: var(--white) !important; 
+    font-size: clamp(2.5rem, 10vw, 6rem) !important; 
+    font-weight: 950 !important; 
+    text-transform: uppercase; 
+    line-height: 0.95; 
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+}
+
+/* ==========================================================================
+   6. TACTICAL DOCK & COMMAND TRAY (MOBILE APP UI)
+   ========================================================================== */
+.tactical-dock { 
+    position: fixed !important; 
+    bottom: 0 !important; 
+    left: 0 !important; 
+    width: 100% !important; 
+    height: 80px !important; 
+    background: var(--navy) !important; 
+    border-top: 5px solid var(--gold) !important; 
+    display: flex !important; 
+    justify-content: space-around !important; 
+    align-items: center !important; 
+    z-index: 999999 !important; 
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+}
+
+.dock-item { 
+    color: var(--white) !important; 
+    text-decoration: none !important; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: center !important; 
+    font-size: 11px !important; 
+    font-weight: 800 !important; 
+    text-transform: uppercase !important; 
+    transition: 0.2s ease;
+}
+
+.dock-item:active { transform: scale(0.9); }
+
+/* The Elite Command Tray */
+#commandTray { 
+    position: fixed !important; 
+    bottom: -100%; 
+    left: 0; 
+    width: 100%; 
+    background: var(--white) !important; 
+    border-radius: 30px 30px 0 0; 
+    padding: 30px !important; 
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    z-index: 999998 !important; 
+    box-shadow: 0 -15px 50px rgba(0,0,0,0.25); 
+    box-sizing: border-box;
+}
+
+#commandTray.tray-open { bottom: 80px !important; }
+
+/* Desktop Guard: Hide Mobile App Elements on PC */
+@media (min-width: 1025px) { 
+    .tactical-dock, #commandTray { display: none !important; } 
+    body { padding-bottom: 0 !important; }
+}
+
+@media (max-width: 1024px) {
+    body { padding-bottom: 100px !important; } /* Prevents dock from covering page content */
+}
