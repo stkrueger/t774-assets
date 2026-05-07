@@ -23,9 +23,9 @@
     .door-tile p { font-size: 0.95rem !important; line-height: 1.4 !important; color: #4b5563 !important; font-weight: 600 !important; }
     .door-tile-highlight { border-top-color: #FFCC00; }
 
-    /* 4. NARRATIVE SECTIONS */
+/* 4. NARRATIVE SECTIONS */
     .section-padding { padding: 80px 0; background: white; }
-    .split-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center; }
+    .split-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center !important; }
     .split-grid-rtl { direction: rtl; }
     .split-grid-ltr { direction: ltr; }
     .pathway-tag { color: #FFCC00; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
@@ -38,7 +38,7 @@
     /* 5. STATS BAR */
     .stats-bar { background: white; padding: 50px 0; border-bottom: 1px solid #eee; text-align: center; }
     .stats-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
-    .stat-num { display: block; font-size: 3rem; font-weight: 900; color: #003F87; line-height: 1; }
+    .stat-num { display: block; font-size: 3rem; font-weight: 900; color: #003F87 !important; line-height: 1; }
     .stat-txt { font-size: 0.85rem; font-weight: 800; color: #666; text-transform: uppercase; letter-spacing: 2px; }
 
     /* 6. SM QUOTE */
@@ -61,6 +61,22 @@
     .tray-btn { background: #f3f4f6; padding: 15px; border-radius: 10px; text-align: center; text-decoration: none; color: #333; font-weight: 800; display: flex; flex-direction: column; align-items: center; }
 
     @media (min-width: 1025px) { .tactical-dock, #commandTray { display: none !important; } }
+
+    /* 8. TWH SYSTEM UI FIXES */
+    #MobileMenuBtn, .MobileMenuBtn {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background-color: #003F87 !important;
+        color: #FFFFFF !important;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-family: 'Inter', sans-serif;
+        font-weight: bold;
+        z-index: 999999;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        border: 2px solid rgba(255,255,255,0.2);
+    }
 </style>
 
 <div class="mecca-wrapper">
