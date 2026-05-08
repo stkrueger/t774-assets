@@ -29,3 +29,40 @@
         }
     }, 100);
 </script>
+
+
+
+prospect
+
+<div id="mission-control-root">
+    <div style="text-align:center; padding:100px;">
+        <iconify-icon icon="eos-icons:loading" style="font-size:48px; color:#00234B;"></iconify-icon>
+        <p style="margin-top:15px; color:#666; font-family:sans-serif; text-transform:uppercase; letter-spacing:2px;">Syncing with Command Center...</p>
+    </div>
+</div>
+
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+<script>
+    (function() {
+        // We use a dynamic script injection to bypass TWH's editor encoding issues
+        var script = document.createElement('script');
+        // The ?v= calculation ensures we never get a 400 error from an old cache
+        script.src = 'https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/core/master-logic.js?v=' + Date.now();
+        script.async = true;
+        
+        script.onload = function() {
+            console.log("? Data Link Secured. Booting...");
+            if (typeof window.routeThisPage === 'function') {
+                window.routeThisPage();
+            }
+        };
+
+        script.onerror = function() {
+            document.getElementById('mission-control-root').innerHTML = 
+                '<div style="text-align:center; padding:50px; color:red;">CRITICAL: Connection to GitHub Brain Failed.</div>';
+        };
+
+        document.head.appendChild(script);
+    })();
+</script>
