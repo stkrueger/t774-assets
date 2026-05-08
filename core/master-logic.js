@@ -23,8 +23,9 @@ const T774_ROUTER = {
 window.routeThisPage = function() {
     const urlParams = new URLSearchParams(window.location.search);
     
-    // CRITICAL FIX: Check Custom_Form_ID FIRST. 
-    // This stops TWH from defaulting to 'home.html' via the Menu_Item_ID.
+    // CRITICAL FIX: We must check Custom_Form_ID BEFORE Menu_Item_ID.
+    // TWH often carries both, and checking the Menu ID first causes the 
+    // script to stop at the general page ID rather than the specific tool ID.
     let menuId = urlParams.get('Custom_Form_ID') || 
                  urlParams.get('Menu_Item_ID') || 
                  urlParams.get('menu_item_id');
