@@ -1,6 +1,6 @@
 /**
- * PROJECT PHOENIX: MASTER LOGIC v2.4
- * Fail-Safe Edition: 3s Intel Timeout + Observer Reveal
+ * PROJECT PHOENIX: MASTER LOGIC v2.5
+ * Supply Depot Integration + Fail-Safe Intel
  */
 
 const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVadFgts618Tmji9qZaVbf5DQWaKWOMlf9wJXvrLzq6O9cgV0R901bIMjtdYEuikq6/exec';
@@ -11,6 +11,7 @@ const T774_ROUTER = {
     '62214': 'scout-ops.html',
     '57972': 'family-hub.html',
     '62215': 'leader-intel.html',
+    '62216': 'supply-depot.html', // NEW: Supply Depot Routing
     'HOME':  'home.html' 
 };
 
@@ -19,12 +20,13 @@ const T774_ROUTER = {
  */
 window.routeThisPage = function() {
     const urlParams = new URLSearchParams(window.location.search);
+    // Support Menu_Item_ID, menu_item_id, and Custom_Form_ID
     let menuId = urlParams.get('Menu_Item_ID') || urlParams.get('menu_item_id') || urlParams.get('Custom_Form_ID');
     
     const fileName = T774_ROUTER[menuId] || T774_ROUTER['HOME'];
     const githubPath = `https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/pages/${fileName}`;
 
-    console.log(`? Phoenix Router: Routing ${menuId || 'DEFAULT'} -> ${fileName}`);
+    console.log(`🚀 Phoenix Router: Routing ${menuId || 'DEFAULT'} -> ${fileName}`);
 
     fetch(githubPath)
         .then(response => {
@@ -85,7 +87,7 @@ async function fetchLiveEvents() {
             if (dateDisplay) dateDisplay.innerText = `${match.title} - ${dateStr}`;
             if (badge) badge.innerText = `Next Mission: ${dateStr}`;
         } else {
-            runThursdayFallback();
+            routerFallback(); // Consolidated fallback check
         }
 
     } catch (err) {
