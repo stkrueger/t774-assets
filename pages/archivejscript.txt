@@ -1,0 +1,31 @@
+<div id="mission-control-root">
+    <div style="text-align:center; padding:100px;">
+        <iconify-icon icon="eos-icons:loading" style="font-size:48px; color:#00234B;"></iconify-icon>
+        <p style="margin-top:15px; color:#666; font-family:sans-serif; text-transform:uppercase; letter-spacing:2px;">Syncing with Command Center...</p>
+    </div>
+</div>
+
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/core/master-logic.js"></script>
+
+<script>
+    // SMART BOOT ENGINE
+    let checkCount = 0;
+    const bootInterval = setInterval(() => {
+        checkCount++;
+        
+        if (typeof window.routeThisPage === 'function') {
+            clearInterval(bootInterval);
+            console.log("? Data Link Secured. Booting...");
+            window.routeThisPage();
+        } 
+        
+        // If it takes more than 5 seconds, show error
+        if (checkCount > 50) {
+            clearInterval(bootInterval);
+            console.error("? Link Timeout.");
+            document.getElementById('mission-control-root').innerHTML = 
+                '<div style="text-align:center; padding:50px; color:red;">CRITICAL: Connection to GitHub Brain Failed. Check Repo Visibility.</div>';
+        }
+    }, 100);
+</script>
