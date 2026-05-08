@@ -11,7 +11,7 @@ const T774_ROUTER = {
     '62214': 'scout-ops.html',
     '57972': 'family-hub.html',
     '62215': 'leader-intel.html',
-    '62216': 'supply-depot.html', // NEW: Supply Depot Routing
+    '62216': 'supplydepot.html', // NEW: Supply Depot Routing
     'HOME':  'home.html' 
 };
 
