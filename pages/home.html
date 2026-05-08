@@ -1,124 +1,191 @@
-<meta name="google-site-verification" content="3s-Y84U-YhhCe6q0JAgNk7_RQ85NY1zOMpQMqEAOzPw" />
+<meta name="description" content="Troop 774 in Jupiter, FL. A 100% Scout-led BSA troop specializing in high-adventure, wilderness survival, and leadership development in Northern Palm Beach County.">
+<meta name="keywords" content="Boy Scouts Jupiter FL, Scouts BSA Palm Beach County, Troop 774, Jupiter youth leadership, Tequesta scouting, Gulf Stream Council, outdoor education">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Scouts BSA Troop 774 | Jupiter, Florida">
+<meta property="og:description" content="Empowering the next generation of leaders through the Patrol Method and High Adventure.">
+
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
 <style>
-    /* 1. LAYOUT & THEME */
-    .mecca-wrapper { font-family: 'Inter', system-ui, sans-serif; background: #f3f4f6; padding-bottom: 110px; width: 100% !important; }
-    .container-wide { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    /* ==========================================================================
+       THE FULL-WIDTH HAMMER & RESET
+       ========================================================================== */
+    .MainContainer, .MiddleColumn, #aspnetForm, .custom-form-wrapper, div[role="main"] {
+        max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important;
+    }
+    body { margin: 0 !important; padding: 0 !important; }
 
-    /* 2. VIDEO HERO */
-    .video-hero { position: relative; height: 65vh; width: 100%; overflow: hidden; border-bottom: 8px solid #FFCC00; background: #00234B; }
-    .video-hero video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
-    .hero-content { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; z-index: 5; }
-    .hero-content h1 { color: white !important; font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; margin: 0; text-shadow: 2px 4px 15px rgba(0,0,0,0.8); }
-    .hero-pill { display: inline-block; background: #FFCC00; color: #00234B; padding: 8px 20px; border-radius: 50px; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; font-size: 0.75rem; }
+    :root {
+        --t774-blue: #003F87;
+        --t774-deep: #00234B;
+        --t774-gold: #FFCC00;
+        --text-main: #1a1a1a;
+        --text-muted: #4b5563;
+        --bg-light: #f3f4f6;
+    }
 
-    /* 3. SWITCHBOARD (FOUR DOORS) */
-    .door-header { text-align: center; margin: 80px auto 60px auto; padding: 0 20px; position: relative; z-index: 100; }
-    .door-header p { color: #00234B; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; margin: 0; line-height: 1.4; }
-    .door-header-line { width: 60px; height: 5px; background: #FFCC00; margin: 15px auto; border-radius: 2px; }
-    .door-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: -60px auto 60px; position: relative; z-index: 10; }
-    .door-tile { background: white; border-radius: 15px; padding: 30px 20px; text-decoration: none !important; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #ddd; border-top: 6px solid #003F87; transition: 0.3s; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-    .door-tile:hover { transform: translateY(-8px); border-color: #FFCC00; }
-    .door-tile h3 { color: #003F87 !important; font-weight: 900 !important; margin: 15px 0 5px !important; font-size: 1.2rem !important; }
-    .door-tile p { font-size: 0.95rem !important; line-height: 1.4 !important; color: #4b5563 !important; font-weight: 600 !important; }
-    .door-tile-highlight { border-top-color: #FFCC00; }
+    .mecca-wrapper * { box-sizing: border-box !important; }
 
-/* 4. NARRATIVE SECTIONS */
-    .section-padding { padding: 80px 0; background: white; }
-    .split-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center !important; }
-    .split-grid-rtl { direction: rtl; }
-    .split-grid-ltr { direction: ltr; }
-    .pathway-tag { color: #FFCC00; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
-    .pathway-tag-sm { font-size: 0.7rem; }
-    h2 { font-size: 2.5rem !important; color: #003F87 !important; font-weight: 900 !important; margin-bottom: 20px !important; }
-    .narrative-list { list-style: none; padding: 0; margin-top: 20px; }
-    .narrative-list li { margin-bottom: 15px; font-weight: 800; color: #003F87; display: flex; align-items: center; gap: 10px; }
-    .narrative-img { width: 100%; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+    /* VIEWPORT BREAKOUT */
+    .mecca-wrapper { 
+        font-family: 'Inter', system-ui, sans-serif; 
+        background: var(--bg-light); 
+        width: 100vw !important; 
+        position: relative;
+        left: 50%; right: 50%;
+        margin-left: -50vw !important; margin-right: -50vw !important;
+        overflow-x: hidden;
+        padding-bottom: 120px; 
+    }
+
+    /* 1. CINEMATIC VIDEO HERO */
+    .video-hero { position: relative; height: 75vh; min-height: 500px; width: 100%; overflow: hidden; border-bottom: 10px solid var(--t774-gold); background: var(--t774-deep); }
+    .video-hero video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) contrast(1.1); }
+    .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; z-index: 5; }
+    .hero-content h1 { color: white !important; font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 950; text-transform: uppercase; margin: 0; text-shadow: 2px 4px 20px rgba(0,0,0,0.8); line-height: 1.1; letter-spacing: -1px; }
+    .hero-pill { display: inline-block; background: var(--t774-gold); color: var(--t774-deep); padding: 10px 25px; border-radius: 50px; font-weight: 950; letter-spacing: 3px; margin-bottom: 20px; font-size: clamp(0.75rem, 2vw, 0.9rem); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+    /* 2. THE FOUR DOORS (SWITCHBOARD) */
+    .door-header { text-align: center; margin: clamp(60px, 8vw, 100px) auto 40px auto; padding: 0 20px; }
+    .door-header p { color: var(--t774-deep); font-weight: 900; text-transform: uppercase; letter-spacing: 3px; font-size: clamp(1rem, 3vw, 1.2rem); margin: 0; }
+    .door-header-line { width: 80px; height: 6px; background: var(--t774-gold); margin: 20px auto 0; border-radius: 5px; }
     
-    /* 5. STATS BAR */
-    .stats-bar { background: white; padding: 50px 0; border-bottom: 1px solid #eee; text-align: center; }
-    .stats-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
-    .stat-num { display: block; font-size: 3rem; font-weight: 900; color: #003F87 !important; line-height: 1; }
-    .stat-txt { font-size: 0.85rem; font-weight: 800; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+    .door-grid { 
+        max-width: 1400px; margin: 0 auto clamp(60px, 10vw, 100px); padding: 0 20px;
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; 
+    }
+    
+    /* GOOGLEBOT FIX: Standard href routing instead of JS Links */
+    .door-tile { 
+        background: white; border-radius: 20px; padding: 40px 20px; text-decoration: none !important; 
+        display: flex; flex-direction: column; align-items: center; text-align: center; 
+        border: 1px solid #e5e7eb; border-top: 8px solid var(--t774-blue); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+    }
+    .door-tile:hover { transform: translateY(-10px); border-color: var(--t774-gold); box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
+    .door-tile h3 { color: var(--t774-blue) !important; font-weight: 950 !important; margin: 20px 0 10px !important; font-size: 1.4rem !important; text-transform: uppercase; letter-spacing: 1px; }
+    .door-tile p { font-size: 1.05rem !important; line-height: 1.5 !important; color: var(--text-muted) !important; font-weight: 600 !important; margin: 0; }
+    .door-tile-highlight { border-top-color: var(--t774-gold); background: #fdfaf0; }
 
-    /* 6. SM QUOTE */
-    .quote-card { background: white; border-radius: 20px; padding: 40px; border-left: 8px solid #FFCC00; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-    .quote-headline { font-size: 1.8rem !important; margin-bottom: 10px !important; }
-    .quote-text { font-style: italic; font-size: 1.2rem !important; color: #1a1a1a !important; line-height: 1.4 !important; margin-bottom: 20px !important; }
-    .quote-author { font-weight: 900; color: #003F87; text-transform: uppercase; letter-spacing: 1px; }
-    .sm-portrait-container { display: flex; justify-content: center; }
-    .sm-portrait { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 6px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    /* 3. TROOP INTELLIGENCE (ECOSYSTEM HUB) */
+    .intel-section { background: var(--t774-deep); padding: clamp(60px, 8vw, 100px) 20px; text-align: center; }
+    .intel-grid { max-width: 1400px; margin: 50px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    
+    .intel-card {
+        background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 24px;
+        padding: 40px; text-align: left; text-decoration: none !important; transition: 0.3s;
+        display: flex; flex-direction: column; height: 100%;
+    }
+    .intel-card:hover { background: rgba(255,204,0,0.05); border-color: var(--t774-gold); transform: translateY(-5px); }
+    .intel-card h3 { color: white !important; font-size: 1.5rem !important; font-weight: 950 !important; text-transform: uppercase; margin: 0 0 15px 0; display: flex; align-items: center; gap: 12px; }
+    .intel-card p { color: #cbd5e1 !important; font-size: 1.05rem !important; line-height: 1.6 !important; font-weight: 500 !important; margin: 0 0 25px 0; flex-grow: 1; }
+    .intel-link { color: var(--t774-gold); font-weight: 900; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 5px; }
+
+    /* 4. STATS BAR */
+    .stats-bar { background: var(--t774-gold); padding: clamp(40px, 6vw, 60px) 20px; text-align: center; border-bottom: 8px solid var(--t774-blue); }
+    .stats-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; }
+    .stat-num { display: block; font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 950; color: var(--t774-deep) !important; line-height: 1; letter-spacing: -2px; }
+    .stat-txt { font-size: clamp(0.85rem, 2vw, 1rem); font-weight: 900; color: var(--t774-blue); text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; display: block;}
+
+    /* 5. NARRATIVE / SCOUTMASTER QUOTE */
+    .section-padding { padding: clamp(60px, 8vw, 120px) 20px; background: white; }
+    .split-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: clamp(40px, 8vw, 80px); align-items: center; }
+    @media (min-width: 900px) { .split-grid { grid-template-columns: 1fr 1fr; } }
+    
+    .quote-card { background: white; border-radius: 30px; padding: clamp(30px, 5vw, 60px); border-left: 10px solid var(--t774-gold); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+    .quote-headline { font-size: clamp(1.8rem, 4vw, 2.5rem) !important; color: var(--t774-blue) !important; font-weight: 950 !important; margin-top: 0 !important; margin-bottom: 20px !important; text-transform: uppercase; }
+    .quote-text { font-style: italic; font-size: clamp(1.1rem, 3vw, 1.4rem) !important; color: var(--text-main) !important; line-height: 1.6 !important; margin-bottom: 30px !important; font-weight: 600; }
+    .quote-author { font-weight: 950; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; font-size: 0.95rem; }
+    
+    /* SM PORTRAIT CROP FIX: Forces aspect ratio and pins the top of the image to stay in frame */
+    .sm-portrait { 
+        width: 100%; max-width: 350px; aspect-ratio: 4 / 5; 
+        object-fit: cover; object-position: center 10%; 
+        border-radius: 30px; display: block; margin: 0 auto; 
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+    }
+
+    /* 6. SITE DIRECTORY / FAQ ACCORDION */
+    .faq-section { max-width: 1000px; margin: 0 auto clamp(60px, 10vw, 120px); padding: 0 20px; }
+    .faq-header { text-align: center; margin-bottom: 40px; }
+    .faq-header h2 { color: var(--t774-deep); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 950; text-transform: uppercase; margin: 0; }
+    
+    .faq-item { background: white; border: 1px solid #e5e7eb; border-radius: 16px; margin-bottom: 15px; overflow: hidden; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+    .faq-button { width: 100%; text-align: left; padding: 25px; background: transparent; border: none; font-size: 1.15rem; font-weight: 900; color: var(--t774-blue); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+    .faq-button:hover { background: #f8fafc; }
+    .faq-button[aria-expanded="true"] { border-bottom: 1px solid #e5e7eb; color: var(--t774-deep); }
+    .faq-button iconify-icon { transition: transform 0.3s; font-size: 24px; color: var(--t774-gold); }
+    .faq-button[aria-expanded="true"] iconify-icon { transform: rotate(180deg); }
+    
+    .faq-content { padding: 0 25px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; background: #fdfaf0; }
+    .faq-content p { font-size: 1.05rem; line-height: 1.6; color: var(--text-main); font-weight: 500; margin: 20px 0; }
+    .faq-content a { color: var(--t774-blue); font-weight: 800; text-decoration: underline; }
 
     /* 7. APP DOCK & TRAY */
-    .tactical-dock { position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 75px !important; background: #00234B !important; border-top: 4px solid #FFCC00 !important; display: flex !important; justify-content: space-around !important; align-items: center !important; z-index: 999999 !important; }
-    .dock-item { color: white !important; text-decoration: none !important; display: flex !important; flex-direction: column !important; align-items: center !important; font-size: 10px !important; font-weight: 800 !important; text-transform: uppercase !important; }
+    .tactical-dock { position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 90px !important; background: var(--t774-deep) !important; border-top: 5px solid var(--t774-gold) !important; display: grid !important; grid-template-columns: repeat(4, 1fr) !important; align-items: center !important; z-index: 999999 !important; padding-bottom: env(safe-area-inset-bottom); }
+    .dock-item { color: white !important; text-decoration: none !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; font-size: 11px !important; font-weight: 900 !important; text-transform: uppercase !important; gap: 4px; border: none; background: transparent; cursor: pointer; }
+    .dock-item iconify-icon { font-size: 32px !important; color: var(--t774-gold) !important; }
     
-    #commandTray { position: fixed !important; bottom: -100%; left: 0; width: 100%; background: white !important; border-radius: 25px 25px 0 0; padding: 20px !important; transition: 0.4s ease; z-index: 999998 !important; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
-    #commandTray.tray-open { bottom: 75px !important; }
-    .tray-handle { width: 40px; height: 5px; background: #ddd; border-radius: 10px; margin: 0 auto 20px; }
-    .tray-title { text-align: center; color: #003F87; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; }
-    .tray-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .tray-btn { background: #f3f4f6; padding: 15px; border-radius: 10px; text-align: center; text-decoration: none; color: #333; font-weight: 800; display: flex; flex-direction: column; align-items: center; }
+    #commandTray { position: fixed !important; bottom: -100%; left: 0; width: 100%; background: white !important; border-radius: 30px 30px 0 0; padding: 30px 20px 120px !important; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 999998 !important; box-shadow: 0 -20px 60px rgba(0,0,0,0.3); }
+    #commandTray.tray-open { bottom: 0 !important; }
+    .tray-handle { width: 50px; height: 6px; background: #cbd5e1; border-radius: 10px; margin: 0 auto 30px; }
+    .tray-title { text-align: center; color: var(--t774-blue); font-weight: 950; text-transform: uppercase; margin: 0 0 20px 0; font-size: 1.4rem; }
+    .tray-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 600px; margin: 0 auto; }
+    .tray-btn { background: #f8fafc; padding: 20px; border-radius: 16px; text-align: center; text-decoration: none !important; color: var(--t774-deep); font-weight: 900; font-size: 0.95rem; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 2px solid #e2e8f0; transition: 0.2s; }
+    .tray-btn:hover { border-color: var(--t774-gold); background: white; }
 
     @media (min-width: 1025px) { .tactical-dock, #commandTray { display: none !important; } }
 
-    /* 8. TWH SYSTEM UI FIXES */
+    /* TWH SYSTEM UI FIXES */
     #MobileMenuBtn, .MobileMenuBtn {
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        background-color: #003F87 !important;
-        color: #FFFFFF !important;
-        border-radius: 6px;
-        padding: 8px 12px;
-        font-family: 'Inter', sans-serif;
-        font-weight: bold;
-        z-index: 999999;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        border: 2px solid rgba(255,255,255,0.2);
+        position: fixed; top: 15px; left: 15px; background-color: var(--t774-blue) !important;
+        color: white !important; border-radius: 8px; padding: 10px 15px; font-family: 'Inter', sans-serif;
+        font-weight: 900; z-index: 999999; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.2);
     }
 </style>
 
 <div class="mecca-wrapper">
+    
     <header class="video-hero">
-        <video autoplay muted loop playsinline aria-hidden="true"><source src="https://raw.githubusercontent.com/stkrueger/t774-assets/main/Boys_Scouts_pioneering_202604122133.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline aria-hidden="true">
+            <source src="https://raw.githubusercontent.com/stkrueger/t774-assets/main/Boys_Scouts_pioneering_202604122133.mp4" type="video/mp4">
+        </video>
         <div class="hero-content">
-            <span class="hero-pill">SCOUTS BSA BOYS &bull; TROOP 774 &bull; JUPITER, FL</span>
+            <span class="hero-pill">SCOUTS BSA &bull; TROOP 774 &bull; JUPITER, FL</span>
             <h1>Adventure<br>Starts Here.</h1>
         </div>
     </header>
 
-    <div class="container-wide">
-        <div class="door-header">
-            <p>Select your path below to access the Command Center</p>
-            <div class="door-header-line"></div>
-        </div>
-        <nav class="door-grid" aria-label="Primary audience pathways">
-            <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=62171&Stack=0&Custom_Form_ID=8');" class="door-tile">
-                <iconify-icon icon="mdi:compass-outline" aria-hidden="true" style="font-size:45px; color:#003F87;"></iconify-icon>
-                <h3>PROSPECT</h3>
-                <p>"I am interested in joining Troop 774"</p>
-            </a>
-            <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=62168&Stack=0&Custom_Form_ID=7');" class="door-tile door-tile-highlight">
-                <iconify-icon icon="mdi:account-plus-outline" aria-hidden="true" style="font-size:45px; color:#FFCC00;"></iconify-icon>
-                <h3>NEW SCOUT</h3>
-                <p>"I just joined and need to get started"</p>
-            </a>
-            <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=62214&Stack=0&Custom_Form_ID=11');" class="door-tile">
-                <iconify-icon icon="mdi:shield-check-outline" aria-hidden="true" style="font-size:45px; color:#003F87;"></iconify-icon>
-                <h3>SCOUT</h3>
-                <p>"I need to check my rank or RSVP"</p>
-            </a>
-            <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=57972&Stack=1');" class="door-tile">
-                <iconify-icon icon="mdi:account-group-outline" aria-hidden="true" style="font-size:45px; color:#003F87;"></iconify-icon>
-                <h3>SCOUT FAMILIES</h3>
-                <p>"I need to manage funds or forms"</p>
-            </a>
-        </nav>
+    <div class="door-header">
+        <p>Select your path below to access operations</p>
+        <div class="door-header-line"></div>
     </div>
+    
+    <nav class="door-grid" aria-label="Primary audience pathways">
+        <a href="formCustom.aspx?Menu_Item_ID=62171&Stack=0&Custom_Form_ID=8" class="door-tile">
+            <iconify-icon icon="mdi:compass-outline" aria-hidden="true" style="font-size:55px; color:var(--t774-blue);"></iconify-icon>
+            <h3>Prospects</h3>
+            <p>"We are interested in joining Troop 774"</p>
+        </a>
+        <a href="formCustom.aspx?Menu_Item_ID=62168&Stack=0&Custom_Form_ID=7" class="door-tile door-tile-highlight">
+            <iconify-icon icon="mdi:account-plus-outline" aria-hidden="true" style="font-size:55px; color:var(--t774-gold);"></iconify-icon>
+            <h3>New Members</h3>
+            <p>"We just joined and need to get started"</p>
+        </a>
+        <a href="formCustom.aspx?Menu_Item_ID=62214&Stack=0&Custom_Form_ID=11" class="door-tile">
+            <iconify-icon icon="mdi:shield-star-outline" aria-hidden="true" style="font-size:55px; color:var(--t774-blue);"></iconify-icon>
+            <h3>Scout Command</h3>
+            <p>"I need to check my rank or RSVP"</p>
+        </a>
+        <a href="formCustom.aspx?Menu_Item_ID=62215&Stack=0&Custom_Form_ID=12" class="door-tile">
+            <iconify-icon icon="mdi:shield-account-outline" aria-hidden="true" style="font-size:55px; color:var(--t774-blue);"></iconify-icon>
+            <h3>Leader Command</h3>
+            <p>"I need to access rosters or operations"</p>
+        </a>
+    </nav>
 
     <section class="stats-bar">
-        <div class="container-wide stats-container">
+        <div class="stats-container">
             <div><span class="stat-num">50+</span><span class="stat-txt">Active Scouts</span></div>
             <div><span class="stat-num">87</span><span class="stat-txt">Eagle Scouts</span></div>
             <div><span class="stat-num">100%</span><span class="stat-txt">Scout Led</span></div>
@@ -126,64 +193,165 @@
         </div>
     </section>
 
-    <section class="section-padding">
-        <div class="container-wide split-grid">
-            <div>
-                <span class="pathway-tag">The Expedition Pathway</span>
-                <h2>We Don't Stay Put.</h2>
-                <p>Unlike troops that visit the same state park every year, Troop 774 believes in rotation. From the peaks of Philmont Scout Ranch in New Mexico to the coral reefs of the Florida Sea Base, our program scales with the ability of our scouts.</p>
-                <ul class="narrative-list">
-                    <li><iconify-icon icon="mdi:check-circle" aria-hidden="true" style="color:#FFCC00; font-size:24px;"></iconify-icon> Monthly Wilderness Treks</li>
-                    <li><iconify-icon icon="mdi:check-circle" aria-hidden="true" style="color:#FFCC00; font-size:24px;"></iconify-icon> Annual Out-of-State Summer Camps</li>
-                </ul>
-            </div>
-            <div>
-                <img class="img-responsive narrative-img" src="https://raw.githubusercontent.com/stkrueger/t774-assets/main/other.png" alt="Scouts participating in an outdoor expedition">
-            </div>
+    <section class="intel-section">
+        <div class="door-header" style="margin-top: 0;">
+            <p style="color: var(--t774-gold);">Troop Intelligence Hub</p>
+            <h2 style="color: white !important; font-size: clamp(2rem, 5vw, 3rem) !important; margin-top: 10px !important; text-transform: uppercase; font-weight: 950 !important;">Public Resources</h2>
+        </div>
+        
+        <div class="intel-grid">
+            <a href="formCustom.aspx?Menu_Item_ID=61936&Stack=0&Custom_Form_ID=2" class="intel-card">
+                <h3><iconify-icon icon="mdi:information-box-outline" style="color: var(--t774-gold);"></iconify-icon> About Our Troop</h3>
+                <p>Learn about our 100% Scout-led philosophy, our history, and the structure of the Patrol Leaders Council.</p>
+                <span class="intel-link">Read the Manifesto <iconify-icon icon="mdi:arrow-right"></iconify-icon></span>
+            </a>
+            
+            <a href="formCustom.aspx?Menu_Item_ID=62218&Stack=0&Custom_Form_ID=15" class="intel-card">
+                <h3><iconify-icon icon="mdi:map-marker-path" style="color: var(--t774-gold);"></iconify-icon> Adventure Guide</h3>
+                <p>View interactive satellite recon of our primary Florida staging grounds and check the standard gear loadout.</p>
+                <span class="intel-link">View Field Intel <iconify-icon icon="mdi:arrow-right"></iconify-icon></span>
+            </a>
+
+            <a href="formCustom.aspx?Menu_Item_ID=62173&Stack=0&Custom_Form_ID=10" class="intel-card">
+                <h3><iconify-icon icon="mdi:hand-coin-outline" style="color: var(--t774-gold);"></iconify-icon> Earn Your Adventure</h3>
+                <p>We believe a Scout is Thrifty. View our upcoming public fundraising ops like Camp Cards and Car Washes.</p>
+                <span class="intel-link">Support The Troop <iconify-icon icon="mdi:arrow-right"></iconify-icon></span>
+            </a>
         </div>
     </section>
 
     <section class="section-padding">
-        <div class="container-wide split-grid split-grid-rtl">
-            <div class="split-grid-ltr sm-portrait-container">
-                <img src="https://troopwebhost.blob.core.windows.net/troop774pbg/Zoan_202604101256024791946.png" class="img-responsive sm-portrait" alt="Scoutmaster Zoan Vega">
+        <div class="split-grid">
+            <div>
+                <img src="https://troopwebhost.blob.core.windows.net/troop774pbg/Zoan_202604101256024791946.png" class="sm-portrait" alt="Scoutmaster Zoan Vega">
             </div>
-            <div class="split-grid-ltr">
+            <div>
                 <div class="quote-card">
-                    <span class="pathway-tag pathway-tag-sm">The 774 Philosophy</span>
-                    <h2 class="quote-headline">100% SCOUT LED.</h2>
+                    <span style="color: var(--t774-gold); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">The 774 Philosophy</span>
+                    <h2 class="quote-headline">100% Scout Led.</h2>
                     <p class="quote-text">"We build character through action. We are a family-oriented troop that believes in the transformative power of the outdoors. When adults step back, leaders step up."</p>
-                    <p class="quote-author">— ZOAN VEGA, SCOUTMASTER</p>
+                    <p class="quote-author">— Zoan Vega, Scoutmaster</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <section class="faq-section">
+        <div class="faq-header">
+            <h2>Site Directory & FAQ</h2>
+            <div class="door-header-line"></div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-button" aria-expanded="false" onclick="toggleFaq(this)">
+                I am a new parent. Where do I start?
+                <iconify-icon icon="mdi:chevron-down"></iconify-icon>
+            </button>
+            <div class="faq-content">
+                <p>Welcome! We have built a dedicated 30-Day Terminal just for you. Click the yellow <strong>"New Members"</strong> door at the top of this page to view a chronological checklist covering uniform requirements, gear realities, and TroopWebHost login instructions.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-button" aria-expanded="false" onclick="toggleFaq(this)">
+                Where can I find Medical Forms and the Welcome Packet?
+                <iconify-icon icon="mdi:chevron-down"></iconify-icon>
+            </button>
+            <div class="faq-content">
+                <p>All essential operational documents, including AHMR Parts A/B/C and the Troop Welcome Packet, are located inside the <a href="formCustom.aspx?Menu_Item_ID=62168&Stack=0&Custom_Form_ID=7">New Member Briefing</a> portal.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-button" aria-expanded="false" onclick="toggleFaq(this)">
+                How do I check my Scout Account balance or pay dues?
+                <iconify-icon icon="mdi:chevron-down"></iconify-icon>
+            </button>
+            <div class="faq-content">
+                <p>Financial operations are handled internally via TroopWebHost. You must log in using the button at the top of the screen, then navigate to <strong>My Stuff > My Accounts</strong>, or use the "Accounts" button on the mobile app dock.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-button" aria-expanded="false" onclick="toggleFaq(this)">
+                Who are the adult leaders and how do I contact them?
+                <iconify-icon icon="mdi:chevron-down"></iconify-icon>
+            </button>
+            <div class="faq-content">
+                <p>You can view the structure of our Committee and Scoutmaster Corps on the <a href="formCustom.aspx?Menu_Item_ID=62166&Stack=0&Custom_Form_ID=5">Adult Leadership Page</a>. If you have an immediate operational question, please use our <a href="formCustom.aspx?Menu_Item_ID=62165&Stack=0&Custom_Form_ID=4">Contact Form</a>.</p>
+            </div>
+        </div>
+    </section>
+
     <nav class="tactical-dock" aria-label="Mobile Application Navigation">
-        <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=61935');" class="dock-item"><iconify-icon icon="mdi:home-variant" aria-hidden="true" style="color:#FFCC00; font-size:24px;"></iconify-icon>Home</a>
-        <a href="javascript:LinkTo('FormList.aspx?Menu_Item_ID=45922');" class="dock-item"><iconify-icon icon="mdi:calendar-clock" aria-hidden="true" style="color:#FFCC00; font-size:24px;"></iconify-icon>Events</a>
-        <a href="javascript:LinkTo('FormDetail.aspx?Menu_Item_ID=45900');" class="dock-item"><iconify-icon icon="mdi:currency-usd-circle" aria-hidden="true" style="color:#FFCC00; font-size:24px;"></iconify-icon>Accounts</a>
-        <button type="button" class="dock-item" onclick="toggleTray()" style="background:none; border:none; cursor:pointer;"><iconify-icon icon="mdi:view-grid-plus" aria-hidden="true" style="color:#FFCC00; font-size:24px;"></iconify-icon>More</button>
+        <a href="formCustom.aspx?Menu_Item_ID=61935" class="dock-item">
+            <iconify-icon icon="mdi:home-variant" aria-hidden="true"></iconify-icon>Home
+        </a>
+        <a href="FormList.aspx?Menu_Item_ID=45922" class="dock-item">
+            <iconify-icon icon="mdi:calendar-clock" aria-hidden="true"></iconify-icon>Events
+        </a>
+        <a href="FormDetail.aspx?Menu_Item_ID=45900" class="dock-item">
+            <iconify-icon icon="mdi:currency-usd-circle" aria-hidden="true"></iconify-icon>Accounts
+        </a>
+        <button type="button" class="dock-item" onclick="toggleTray()">
+            <iconify-icon icon="mdi:view-grid-plus" aria-hidden="true"></iconify-icon>More
+        </button>
     </nav>
 
     <div id="commandTray" aria-hidden="true">
         <div class="tray-handle"></div>
-        <h3 class="tray-title">Mission Resources</h3>
+        <h3 class="tray-title">Fast Actions</h3>
         <div class="tray-grid">
-            <a href="javascript:LinkTo('formCustom.aspx?Menu_Item_ID=62172&Stack=0&Custom_Form_ID=9');" class="tray-btn"><iconify-icon icon="mdi:shield-star" aria-hidden="true" style="color:#003F87; font-size:24px;"></iconify-icon>Traditions</a>
-            <a href="javascript:LinkTo('FormList.aspx?Menu_Item_ID=45936&Stack=1');" class="tray-btn"><iconify-icon icon="mdi:camera-burst" aria-hidden="true" style="color:#003F87; font-size:24px;"></iconify-icon>Gallery</a>
+            <a href="formCustom.aspx?Menu_Item_ID=62165&Stack=0&Custom_Form_ID=4" class="tray-btn">
+                <iconify-icon icon="mdi:email-fast" aria-hidden="true" style="color:var(--t774-blue); font-size:35px;"></iconify-icon>Contact HQ
+            </a>
+            <a href="https://filestore.scouting.org/filestore/healthsafety/pdf/safe_use_of_medication_in_scouting.pdf" target="_blank" class="tray-btn">
+                <iconify-icon icon="mdi:medical-bag" aria-hidden="true" style="color:var(--t774-blue); font-size:35px;"></iconify-icon>Medical Forms
+            </a>
+            <a href="formCustom.aspx?Menu_Item_ID=62216&Stack=0&Custom_Form_ID=13" class="tray-btn">
+                <iconify-icon icon="mdi:bank-transfer" aria-hidden="true" style="color:var(--t774-blue); font-size:35px;"></iconify-icon>Treasury
+            </a>
+            <a href="FormList.aspx?Menu_Item_ID=45890&Stack=0" class="tray-btn">
+                <iconify-icon icon="mdi:account-details" aria-hidden="true" style="color:var(--t774-blue); font-size:35px;"></iconify-icon>Roster
+            </a>
         </div>
     </div>
 </div>
 
 <script>
-    // These functions must exist in the GitHub file to handle the UI inside the shell
+    // App Tray Toggle Logic
     function toggleTray() { 
         const tray = document.getElementById('commandTray');
-        tray.classList.toggle('tray-open'); 
-        
-        // Accessibility toggle
         const isOpen = tray.classList.contains('tray-open');
-        tray.setAttribute('aria-hidden', !isOpen);
+        
+        if (isOpen) {
+            tray.classList.remove('tray-open');
+            tray.setAttribute('aria-hidden', 'true');
+        } else {
+            tray.classList.add('tray-open');
+            tray.setAttribute('aria-hidden', 'false');
+        }
+    }
+
+    // FAQ Accordion Logic
+    function toggleFaq(button) {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const content = button.nextElementSibling;
+        
+        // Close all other open FAQs
+        document.querySelectorAll('.faq-button').forEach(btn => {
+            btn.setAttribute('aria-expanded', 'false');
+            btn.nextElementSibling.style.maxHeight = null;
+            btn.nextElementSibling.style.paddingTop = '0';
+            btn.nextElementSibling.style.paddingBottom = '0';
+        });
+
+        // Open the clicked one if it was closed
+        if (!isExpanded) {
+            button.setAttribute('aria-expanded', 'true');
+            content.style.paddingTop = '25px';
+            content.style.paddingBottom = '25px';
+            content.style.maxHeight = content.scrollHeight + 50 + "px"; // +50 for padding allowance
+        }
     }
 </script>
