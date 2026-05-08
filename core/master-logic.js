@@ -1,7 +1,7 @@
 /**
  * PROJECT PHOENIX: MASTER LOGIC v2.6
  * Supply Depot Integration + Fail-Safe Intel
- * Fixed: Routing Priority & Fallback Logic
+ * Fixed: Routing Priority for Custom_Form_ID
  */
 
 const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVadFgts618Tmji9qZaVbf5DQWaKWOMlf9wJXvrLzq6O9cgV0R901bIMjtdYEuikq6/exec';
@@ -23,7 +23,8 @@ const T774_ROUTER = {
 window.routeThisPage = function() {
     const urlParams = new URLSearchParams(window.location.search);
     
-    // PRIORITY ROUTING: Check Custom_Form_ID first, then Menu_Item_ID
+    // CRITICAL FIX: Check Custom_Form_ID FIRST. 
+    // This stops TWH from defaulting to 'home.html' via the Menu_Item_ID.
     let menuId = urlParams.get('Custom_Form_ID') || 
                  urlParams.get('Menu_Item_ID') || 
                  urlParams.get('menu_item_id');
@@ -91,7 +92,7 @@ async function fetchLiveEvents() {
             if (dateDisplay) dateDisplay.innerText = `${match.title} - ${dateStr}`;
             if (badge) badge.innerText = `Next Mission: ${dateStr}`;
         } else {
-            runThursdayFallback(); // Fixed: Corrected function name
+            runThursdayFallback();
         }
 
     } catch (err) {
