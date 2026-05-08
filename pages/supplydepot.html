@@ -1,1 +1,55 @@
-t
+<style>
+    :root { --t-gold: #FFCC00; --t-blue: #003F87; --t-deep: #00234B; }
+    .depot-page { background: #f8fafc; min-height: 100vh; padding-bottom: 100px; }
+    .depot-mast { background: var(--t-deep); color: white; padding: 60px 20px; text-align: center; border-bottom: 8px solid var(--t-gold); }
+    .depot-mast h1 { font-weight: 950; text-transform: uppercase; font-size: 3rem; margin: 0; letter-spacing: -2px; }
+    
+    .section-wrap { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
+    .section-title { border-bottom: 3px solid var(--t-gold); padding-bottom: 10px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+    .section-title h2 { font-weight: 900; text-transform: uppercase; color: var(--t-deep); font-size: 1.4rem; margin: 0; }
+    
+    .gear-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+    .gear-tile { background: white; border: 1px solid #e2e8f0; border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; text-decoration: none !important; transition: 0.2s; }
+    .gear-tile:hover { border-color: var(--t-gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    
+    .gear-img { width: 70px; height: 70px; border-radius: 10px; background: #f1f5f9; object-fit: contain; flex-shrink: 0; }
+    .gear-info { flex-grow: 1; min-width: 0; }
+    .gear-name { display: block; font-weight: 900; color: var(--t-deep); font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gear-desc { display: block; font-size: 0.8rem; color: #64748b; margin-top: 2px; }
+    
+    @media print { .no-print { display: none !important; } .depot-mast { padding: 20px; } }
+</style>
+
+<div class="depot-page">
+    <div class="depot-mast">
+        <h1>Supply Depot</h1>
+        <p style="font-weight:700; opacity:0.8;">The Technical Loadout Manual for Troop 774</p>
+    </div>
+
+    <div class="section-wrap reveal">
+        <div class="section-title">
+            <iconify-icon icon="mdi:bed-outline" style="font-size:28px; color:var(--t-blue);"></iconify-icon>
+            <h2>01. Sleep & Recovery</h2>
+        </div>
+        <div class="gear-grid">
+            <a href="https://www.amazon.com/dp/B00363WYZM" target="_blank" class="gear-tile">
+                <img src="https://raw.githubusercontent.com/stkrueger/t774-assets@main/supply-depot/coleman-bag.jpg" class="gear-img">
+                <div class="gear-info">
+                    <span class="gear-name">Coleman Montauk 40F</span>
+                    <span class="gear-desc">Best value starter bag.</span>
+                </div>
+            </a>
+            <a href="https://www.amazon.com/dp/B004532GBA" target="_blank" class="gear-tile">
+                <img src="https://raw.githubusercontent.com/stkrueger/t774-assets@main/supply-depot/zlite.jpg" class="gear-img">
+                <div class="gear-info">
+                    <span class="gear-name">Z-Lite Foam Pad</span>
+                    <span class="gear-desc">Indestructible insulation.</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div style="text-align:center; padding-top: 50px;" class="no-print">
+        <button onclick="window.print()" style="background:var(--t-gold); color:var(--t-deep); padding:15px 40px; border:none; border-radius:50px; font-weight:950; text-transform:uppercase; cursor:pointer;">Print Mission Checklist</button>
+    </div>
+</div>
