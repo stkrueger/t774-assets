@@ -1,6 +1,7 @@
 /**
- * PROJECT PHOENIX: MASTER LOGIC v2.5
+ * PROJECT PHOENIX: MASTER LOGIC v2.6
  * Supply Depot Integration + Fail-Safe Intel
+ * Fixed: Routing Priority & Fallback Logic
  */
 
 const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVadFgts618Tmji9qZaVbf5DQWaKWOMlf9wJXvrLzq6O9cgV0R901bIMjtdYEuikq6/exec';
@@ -11,8 +12,8 @@ const T774_ROUTER = {
     '62214': 'scout-ops.html',
     '57972': 'family-hub.html',
     '62215': 'leader-intel.html',
-    '62512': 'supplydepot.html', // Add this
-    '18':    'supplydepot.html', // Add this
+    '62512': 'supplydepot.html', 
+    '18':    'supplydepot.html', 
     'HOME':  'home.html' 
 };
 
@@ -21,13 +22,16 @@ const T774_ROUTER = {
  */
 window.routeThisPage = function() {
     const urlParams = new URLSearchParams(window.location.search);
-    // Support Menu_Item_ID, menu_item_id, and Custom_Form_ID
-    let menuId = urlParams.get('Menu_Item_ID') || urlParams.get('menu_item_id') || urlParams.get('Custom_Form_ID');
+    
+    // PRIORITY ROUTING: Check Custom_Form_ID first, then Menu_Item_ID
+    let menuId = urlParams.get('Custom_Form_ID') || 
+                 urlParams.get('Menu_Item_ID') || 
+                 urlParams.get('menu_item_id');
     
     const fileName = T774_ROUTER[menuId] || T774_ROUTER['HOME'];
     const githubPath = `https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/pages/${fileName}`;
 
-    console.log(`🚀 Phoenix Router: Routing ${menuId || 'DEFAULT'} -> ${fileName}`);
+    console.log(`🚀 Phoenix Router: Mapping ID [${menuId}] to [${fileName}]`);
 
     fetch(githubPath)
         .then(response => {
@@ -41,8 +45,8 @@ window.routeThisPage = function() {
                 
                 // EXECUTE ELITE FEATURES
                 initInteractivity();
-                initScrollReveal(); // Initialize animations immediately
-                fetchLiveEvents();   // Fetch data in the background
+                initScrollReveal(); 
+                fetchLiveEvents();   
                 
                 console.log(`✅ SPA Engine: Rendered ${fileName}`);
             }
@@ -58,7 +62,6 @@ async function fetchLiveEvents() {
     const dateDisplay = document.getElementById('nextMeetingDate');
     if (!badge && !dateDisplay) return;
 
-    // TACTICAL TIMEOUT: Don't let a slow fetch hang the UI
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000);
 
@@ -88,7 +91,7 @@ async function fetchLiveEvents() {
             if (dateDisplay) dateDisplay.innerText = `${match.title} - ${dateStr}`;
             if (badge) badge.innerText = `Next Mission: ${dateStr}`;
         } else {
-            routerFallback(); // Consolidated fallback check
+            runThursdayFallback(); // Fixed: Corrected function name
         }
 
     } catch (err) {
@@ -106,7 +109,6 @@ function runThursdayFallback() {
     
     const now = new Date();
     const nextThursday = new Date();
-    // Distance to Thursday (4)
     const diff = (4 + 7 - now.getDay()) % 7;
     nextThursday.setDate(now.getDate() + (diff === 0 ? 0 : diff));
     
@@ -130,7 +132,7 @@ function initScrollReveal() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("active");
-                observer.unobserve(entry.target); // Reveal once, then stop watching
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
