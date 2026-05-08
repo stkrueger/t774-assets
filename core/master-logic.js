@@ -1,13 +1,13 @@
 /**
- * PROJECT PHOENIX: MASTER LOGIC v3.2
- * ANTI-COLLISION & PRIORITY ROUTING
+ * PROJECT PHOENIX: MASTER LOGIC v3.3
+ * Fail-Safe Global Guard Edition
  */
 
-// GLOBAL SHIELD: If this script is already running, stop immediately.
-if (!window.T774_BRAIN_ACTIVE) {
-    window.T774_BRAIN_ACTIVE = true;
+// 🛑 GLOBAL GUARD: Stop execution if this script is already running
+if (!window.T774_LOGIC_ACTIVE) {
+    window.T774_LOGIC_ACTIVE = true;
 
-    // Use window properties to avoid "Already Declared" SyntaxErrors
+    // Use window properties instead of const to prevent "Already Declared" errors
     window.APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVadFgts618Tmji9qZaVbf5DQWaKWOMlf9wJXvrLzq6O9cgV0R901bIMjtdYEuikq6/exec';
 
     window.T774_ROUTER = {
@@ -27,7 +27,7 @@ if (!window.T774_BRAIN_ACTIVE) {
     window.routeThisPage = function() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // PRIORITY: Check Custom_Form_ID first to lock on to tools like the Supply Depot (18)
+        // Check for specific form tools first
         let menuId = urlParams.get('Custom_Form_ID') || 
                      urlParams.get('Menu_Item_ID') || 
                      urlParams.get('menu_item_id');
@@ -35,24 +35,31 @@ if (!window.T774_BRAIN_ACTIVE) {
         const fileName = window.T774_ROUTER[menuId] || window.T774_ROUTER['HOME'];
         const githubPath = `https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/pages/${fileName}`;
 
-        console.log(`🚀 Phoenix Router: Mapping ID [${menuId}] to [${fileName}]`);
+        console.log(`🚀 Router: [${menuId}] -> [${fileName}]`);
 
         fetch(githubPath)
             .then(response => {
-                if (!response.ok) throw new Error('GitHub File Not Found');
+                if (!response.ok) throw new Error('File Not Found');
                 return response.text();
             })
             .then(html => {
                 const root = document.getElementById('mission-control-root');
                 if (root) {
                     root.innerHTML = html;
-                    initInteractivity();
-                    initScrollReveal(); 
-                    fetchLiveEvents();   
-                    console.log(`✅ SPA Engine: Rendered ${fileName}`);
+                    
+                    // Run secondary engines
+                    if (typeof initInteractivity === 'function') initInteractivity();
+                    if (typeof initScrollReveal === 'function') initScrollReveal();
+                    if (typeof fetchLiveEvents === 'function') fetchLiveEvents();
+                    
+                    console.log(`✅ Rendered: ${fileName}`);
                 }
             })
-            .catch(err => console.error('❌ Router Error:', err));
+            .catch(err => {
+                console.error('❌ Injection Error:', err);
+                const root = document.getElementById('mission-control-root');
+                if (root) root.innerHTML = '<div style="text-align:center; padding:50px;">Critical Error: Link to GitHub Pages broken.</div>';
+            });
     };
 
     /**
@@ -60,8 +67,7 @@ if (!window.T774_BRAIN_ACTIVE) {
      */
     window.fetchLiveEvents = async function() {
         const badge = document.getElementById('nextMeetingBadge');
-        const dateDisplay = document.getElementById('nextMeetingDate');
-        if (!badge && !dateDisplay) return;
+        if (!badge) return;
 
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3000);
@@ -71,23 +77,20 @@ if (!window.T774_BRAIN_ACTIVE) {
             clearTimeout(timeoutId);
             const data = await response.json();
 
-            if (data.error || !Array.isArray(data)) {
-                runThursdayFallback();
-                return;
-            }
+            if (!data.error && Array.isArray(data)) {
+                const allowed = ['troop meeting', 'fundraiser'];
+                const blocked = ['plc', 'leader', 'committee', 'staff', 'board', 'scoutmaster'];
 
-            const allowedKeywords = ['troop meeting', 'fundraiser'];
-            const blockedKeywords = ['plc', 'leader', 'committee', 'staff', 'board', 'scoutmaster'];
+                const match = data.find(event => {
+                    const title = (event.title || "").toLowerCase();
+                    return allowed.some(kw => title.includes(kw)) && !blocked.some(kw => title.includes(kw));
+                });
 
-            const match = data.find(event => {
-                const title = (event.title || "").toLowerCase();
-                return allowedKeywords.some(kw => title.includes(kw)) && !blockedKeywords.some(kw => title.includes(kw));
-            });
-
-            if (match) {
-                const dateStr = `${match.month} ${match.day}`;
-                if (dateDisplay) dateDisplay.innerText = `${match.title} - ${dateStr}`;
-                if (badge) badge.innerText = `Next Mission: ${dateStr}`;
+                if (match) {
+                    badge.innerText = `Next Mission: ${match.month} ${match.day}`;
+                } else {
+                    runThursdayFallback();
+                }
             } else {
                 runThursdayFallback();
             }
@@ -97,18 +100,16 @@ if (!window.T774_BRAIN_ACTIVE) {
     };
 
     /**
-     * 3. FALLBACKS & UI HELPERS
+     * 3. HELPERS & BOOT
      */
     window.runThursdayFallback = function() {
         const badge = document.getElementById('nextMeetingBadge');
-        const dateDisplay = document.getElementById('nextMeetingDate');
+        if (!badge) return;
         const now = new Date();
         const nextThursday = new Date();
         const diff = (4 + 7 - now.getDay()) % 7;
         nextThursday.setDate(now.getDate() + (diff === 0 ? 0 : diff));
-        const dateString = nextThursday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        if (dateDisplay) dateDisplay.innerText = `Troop Meeting - ${dateString} @ 7PM`;
-        if (badge) badge.innerText = `Next Briefing: ${dateString}`;
+        badge.innerText = `Next Briefing: ${nextThursday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
     };
 
     window.initScrollReveal = function() {
@@ -134,26 +135,22 @@ if (!window.T774_BRAIN_ACTIVE) {
     window.initGlobalNav = function() {
         let isLoggedIn = false;
         let isLeader = false;
-        let isToolPage = false;
         const urlParams = new URLSearchParams(window.location.search);
-        
-        if (urlParams.get('Custom_Form_ID') || urlParams.get('Menu_Item_ID') === '62512') {
-            isToolPage = true;
-        }
+        const isTool = urlParams.get('Custom_Form_ID') || urlParams.get('Menu_Item_ID') === '62512';
 
         document.querySelectorAll('a, span, div, li').forEach(el => {
-            const text = el.textContent.trim();
-            if (text === 'Log Off') isLoggedIn = true;
-            if (text === 'Maintain' || text === 'Administration') isLeader = true;
+            const t = el.textContent.trim();
+            if (t === 'Log Off') isLoggedIn = true;
+            if (t === 'Maintain' || t === 'Administration') isLeader = true;
         });
 
-        if (isLoggedIn && !isToolPage && !sessionStorage.getItem('t774_redirected')) {
+        if (isLoggedIn && !isTool && !sessionStorage.getItem('t774_redirected')) {
             sessionStorage.setItem('t774_redirected', 'true');
             window.location.href = isLeader ? 'formCustom.aspx?Menu_Item_ID=62215' : 'formCustom.aspx?Menu_Item_ID=62214';
         }
     };
 
-    // BOOT COMMAND
-    initGlobalNav();
+    // BOOT COMMANDS
+    window.initGlobalNav();
     window.routeThisPage();
 }
