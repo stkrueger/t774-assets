@@ -155,13 +155,22 @@ function initInteractivity() {
 function initGlobalNav() {
     let isLoggedIn = false;
     let isLeader = false;
+    let isToolPage = false;
+
+    // Check if we are currently on a custom tool/form page so we DON'T redirect
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('Custom_Form_ID') || urlParams.get('Menu_Item_ID') === '62512') {
+        isToolPage = true;
+    }
+
     document.querySelectorAll('a, span, div, li').forEach(el => {
         const text = el.textContent.trim();
         if (text === 'Log Off') isLoggedIn = true;
         if (text === 'Maintain' || text === 'Administration') isLeader = true;
     });
 
-    if (isLoggedIn && !sessionStorage.getItem('t774_redirected')) {
+    // ONLY redirect if we are on the Home page and logged in
+    if (isLoggedIn && !isToolPage && !sessionStorage.getItem('t774_redirected')) {
         sessionStorage.setItem('t774_redirected', 'true');
         window.location.href = isLeader ? 'formCustom.aspx?Menu_Item_ID=62215' : 'formCustom.aspx?Menu_Item_ID=62214';
     }
