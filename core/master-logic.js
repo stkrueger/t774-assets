@@ -1,12 +1,13 @@
 /**
- * PROJECT PHOENIX: MASTER LOGIC v3.1
- * Anti-Collision & Priority Routing Edition
+ * PROJECT PHOENIX: MASTER LOGIC v3.2
+ * ANTI-COLLISION & PRIORITY ROUTING
  */
 
-if (!window.T774_BRAIN_LOADED) {
-    window.T774_BRAIN_LOADED = true;
+// GLOBAL SHIELD: If this script is already running, stop immediately.
+if (!window.T774_BRAIN_ACTIVE) {
+    window.T774_BRAIN_ACTIVE = true;
 
-    // Use 'var' or check window to avoid "already declared" errors
+    // Use window properties to avoid "Already Declared" SyntaxErrors
     window.APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVadFgts618Tmji9qZaVbf5DQWaKWOMlf9wJXvrLzq6O9cgV0R901bIMjtdYEuikq6/exec';
 
     window.T774_ROUTER = {
@@ -26,7 +27,7 @@ if (!window.T774_BRAIN_LOADED) {
     window.routeThisPage = function() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // PRIORITY: Check Form ID then Menu ID
+        // PRIORITY: Check Custom_Form_ID first to lock on to tools like the Supply Depot (18)
         let menuId = urlParams.get('Custom_Form_ID') || 
                      urlParams.get('Menu_Item_ID') || 
                      urlParams.get('menu_item_id');
@@ -34,11 +35,11 @@ if (!window.T774_BRAIN_LOADED) {
         const fileName = window.T774_ROUTER[menuId] || window.T774_ROUTER['HOME'];
         const githubPath = `https://cdn.jsdelivr.net/gh/stkrueger/t774-assets@main/pages/${fileName}`;
 
-        console.log(`🚀 Router: [${menuId}] -> [${fileName}]`);
+        console.log(`🚀 Phoenix Router: Mapping ID [${menuId}] to [${fileName}]`);
 
         fetch(githubPath)
             .then(response => {
-                if (!response.ok) throw new Error('File Not Found');
+                if (!response.ok) throw new Error('GitHub File Not Found');
                 return response.text();
             })
             .then(html => {
@@ -48,7 +49,7 @@ if (!window.T774_BRAIN_LOADED) {
                     initInteractivity();
                     initScrollReveal(); 
                     fetchLiveEvents();   
-                    console.log(`✅ Rendered: ${fileName}`);
+                    console.log(`✅ SPA Engine: Rendered ${fileName}`);
                 }
             })
             .catch(err => console.error('❌ Router Error:', err));
@@ -70,22 +71,23 @@ if (!window.T774_BRAIN_LOADED) {
             clearTimeout(timeoutId);
             const data = await response.json();
 
-            if (!data.error && Array.isArray(data)) {
-                const allowed = ['troop meeting', 'fundraiser'];
-                const blocked = ['plc', 'leader', 'committee', 'staff', 'board', 'scoutmaster'];
+            if (data.error || !Array.isArray(data)) {
+                runThursdayFallback();
+                return;
+            }
 
-                const match = data.find(event => {
-                    const title = (event.title || "").toLowerCase();
-                    return allowed.some(kw => title.includes(kw)) && !blocked.some(kw => title.includes(kw));
-                });
+            const allowedKeywords = ['troop meeting', 'fundraiser'];
+            const blockedKeywords = ['plc', 'leader', 'committee', 'staff', 'board', 'scoutmaster'];
 
-                if (match) {
-                    const dateStr = `${match.month} ${match.day}`;
-                    if (dateDisplay) dateDisplay.innerText = `${match.title} - ${dateStr}`;
-                    if (badge) badge.innerText = `Next Mission: ${dateStr}`;
-                } else {
-                    runThursdayFallback();
-                }
+            const match = data.find(event => {
+                const title = (event.title || "").toLowerCase();
+                return allowedKeywords.some(kw => title.includes(kw)) && !blockedKeywords.some(kw => title.includes(kw));
+            });
+
+            if (match) {
+                const dateStr = `${match.month} ${match.day}`;
+                if (dateDisplay) dateDisplay.innerText = `${match.title} - ${dateStr}`;
+                if (badge) badge.innerText = `Next Mission: ${dateStr}`;
             } else {
                 runThursdayFallback();
             }
@@ -95,7 +97,7 @@ if (!window.T774_BRAIN_LOADED) {
     };
 
     /**
-     * 3. HELPERS & BOOT
+     * 3. FALLBACKS & UI HELPERS
      */
     window.runThursdayFallback = function() {
         const badge = document.getElementById('nextMeetingBadge');
@@ -132,22 +134,26 @@ if (!window.T774_BRAIN_LOADED) {
     window.initGlobalNav = function() {
         let isLoggedIn = false;
         let isLeader = false;
+        let isToolPage = false;
         const urlParams = new URLSearchParams(window.location.search);
-        const isTool = urlParams.get('Custom_Form_ID') || urlParams.get('Menu_Item_ID') === '62512';
+        
+        if (urlParams.get('Custom_Form_ID') || urlParams.get('Menu_Item_ID') === '62512') {
+            isToolPage = true;
+        }
 
         document.querySelectorAll('a, span, div, li').forEach(el => {
-            const t = el.textContent.trim();
-            if (t === 'Log Off') isLoggedIn = true;
-            if (t === 'Maintain' || t === 'Administration') isLeader = true;
+            const text = el.textContent.trim();
+            if (text === 'Log Off') isLoggedIn = true;
+            if (text === 'Maintain' || text === 'Administration') isLeader = true;
         });
 
-        if (isLoggedIn && !isTool && !sessionStorage.getItem('t774_redirected')) {
+        if (isLoggedIn && !isToolPage && !sessionStorage.getItem('t774_redirected')) {
             sessionStorage.setItem('t774_redirected', 'true');
             window.location.href = isLeader ? 'formCustom.aspx?Menu_Item_ID=62215' : 'formCustom.aspx?Menu_Item_ID=62214';
         }
     };
 
-    // BOOT EXECUTION
+    // BOOT COMMAND
     initGlobalNav();
     window.routeThisPage();
 }
